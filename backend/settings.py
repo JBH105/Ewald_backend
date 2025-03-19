@@ -78,15 +78,21 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'eward_backend',
-        'USER': 'eward',
-        'PASSWORD': 'eward_pass123',
-        'HOST': 'localhost',  # Or your database server address
-        'PORT': '5432',  # Default PostgreSQL port
+        'NAME': 'railway',  # Only the database name
+        'USER': 'postgres',
+        'PASSWORD': 'UaHmfxEvhqQXDcVYQPmlwrhAsrFVRrie',
+        'HOST': 'interchange.proxy.rlwy.net',  # Extracted from the URL
+        'PORT': '21057',  # Extracted from the URL
     }
 }
 
-
+# import os
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
