@@ -17,3 +17,9 @@ class Edge(models.Model):
 
     def __str__(self):
         return f"{self.source.node_id} -> {self.target.node_id}"
+
+class NodeEdgeData(models.Model):
+    data = models.JSONField()
+    
+    def __str__(self):
+        return str(self.data)
