@@ -127,14 +127,36 @@ def update_edge(request, edge_id):
 
 class NodeEdgeDataView(APIView):
     
-    def get(self, request):
-        records = NodeEdgeData.objects.all()
-        serializer = NodeEdgeDataSerializer(records, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def get(self, request, pk=None):
+        if pk:
+            try:
+                record = NodeEdgeData.objects.get(pk=pk)
+                serializer = NodeEdgeDataSerializer(record)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except NodeEdgeData.DoesNotExist:
+                return Response({"error": "Record not found"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            records = NodeEdgeData.objects.all()
+            serializer = NodeEdgeDataSerializer(records, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
     
     def post(self, request):
         serializer = NodeEdgeDataSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        try:
+            record = NodeEdgeData.objects.get(pk=pk)
+        except NodeEdgeData.DoesNotExist:
+            return Response({"error": "Record not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = NodeEdgeDataSerializer(record, data=request.data, partial=True)  # Allows partial updates
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

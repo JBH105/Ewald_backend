@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Node,Edge
+from .models import Node,Edge,NodeEdgeData
 
 @admin.register(Node)
 class NodeAdmin(admin.ModelAdmin):
@@ -12,3 +12,8 @@ class EdgeAdmin(admin.ModelAdmin):
     list_display = ('edge_id', 'source', 'target')
     search_fields = ('edge_id', 'source__node_id', 'target__node_id')
     autocomplete_fields = ['source', 'target']
+
+@admin.register(NodeEdgeData)
+class NodeEdgeDataAdmin(admin.ModelAdmin):
+    list_display = ['id','data']
+    

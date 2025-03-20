@@ -9,4 +9,5 @@ urlpatterns = [
     path('get-edges/', get_edges, name='get_edges'),
     path('update-edge/<str:edge_id>/', update_edge, name='update_edge'),
     path('node-edge-data/', NodeEdgeDataView.as_view(), name='node_edge_data'),
+    path('node-edge-data/<int:pk>/', NodeEdgeDataView.as_view(), name='update_node_edge_data'),
 ]

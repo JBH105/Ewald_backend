@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%-lao8mz5no*^u*t6(da2-ln8%ex85rvmfj328assgr9shgv-&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,9 +39,43 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'myapp',
+    'corsheaders',
 ]
 
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Add your frontend URL here
+]
+
+# Allow all methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS"
+]
+
+# Allow all headers (Authorization, Content-Type, etc.)
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+# Allow credentials (if needed for authentication)
+CORS_ALLOW_CREDENTIALS = True
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,11 +112,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',  # Only the database name
-        'USER': 'postgres',
-        'PASSWORD': 'UaHmfxEvhqQXDcVYQPmlwrhAsrFVRrie',
-        'HOST': 'interchange.proxy.rlwy.net',  # Extracted from the URL
-        'PORT': '21057',  # Extracted from the URL
+        'NAME': 'eward_backend',
+        'USER': 'eward',
+        'PASSWORD': 'eward_pass123',
+        'HOST': 'localhost',  # Or your database server address
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
 
